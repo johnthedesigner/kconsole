@@ -1,0 +1,40 @@
+/* SIDEBAR */
+#sidebar{
+	position:fixed;
+	overflow-y:scroll;
+	top:0;
+	left:0;
+	bottom:0;
+	width:20%;
+	background:#00A79D;
+}
+
+/* PRIMARY */
+#primary{
+	padding-left:20%;
+}
+#header{
+	background:#EEE;
+	clear:both;
+}
+#header #branding{
+	float:left;
+	padding:10px 20px;
+}
+#header #branding:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+#header nav{
+	float:right;
+	overflow:hidden;
+}
+#header nav:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+#header nav ul{
+	list-style:none;
+}

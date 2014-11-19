@@ -1,0 +1,46 @@
+@import "../less/variables.less";
+@import "../less/mixins.less";
+@import "../less/normalize.less";
+@import "../less/grid.less";
+@import "../less/typography.less";
+
+/* SIDEBAR */
+#sidebar{
+	position:fixed;
+	top:0;
+	left:0;
+	bottom:0;
+	width:20%;
+	background:#00A79D;
+}
+
+/* PRIMARY */
+#primary{
+	position:fixed;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	overflow:scroll;
+	margin-left:20%;
+}
+header#header{
+	background:#EEE;
+}
+
+/* DEMO CONTENT */
+.demo-columns div[class^="kit-column"]{
+	background:#EEE;
+	height:200px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.demo-columns div[class^="kit-column"] img{
+	display:none;
+}
+.demo-columns div[class^="kit-column"] p{
+	padding:1em;
+	font-size:12px;
+	text-transform:uppercase;
+	color:#AAA;
+}
