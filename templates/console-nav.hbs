@@ -1,0 +1,47 @@
+<section class="top-bar-section">
+	
+	<ul class="apps-nav">
+		<!-- List Apps -->
+		{{#each app in controller}}
+			{{#list-link}}
+			  {{#link-to 'apps.dashboard' app}}{{app.name}}{{/link-to}}
+			{{/list-link}}
+		{{/each}}
+		<li>{{#link-to 'index'}}My Apps{{/link-to}}</li>
+	</ul>
+	
+	<!-- List App Config Modules -->
+	<ul class="app-config-nav">
+		{{#list-link}}
+			{{#link-to 'apps.dashboard'}}Dashboard{{/link-to}}
+		{{/list-link}}
+		{{#list-link}}
+			{{#link-to 'apps.users'}}Users{{/link-to}}
+		{{/list-link}}
+		{{#list-link}}
+			{{#link-to 'apps.data'}}Data{{/link-to}}
+		{{/list-link}}
+		{{#list-link}}
+			{{#link-to 'apps.logic'}}Business Logic{{/link-to}}
+		{{/list-link}}
+		{{#list-link}}
+			{{#link-to 'apps.files'}}Files{{/link-to}}
+		{{/list-link}}
+		{{#list-link}}
+			{{#link-to 'apps.push'}}Push{{/link-to}}
+		{{/list-link}}
+		{{#list-link}}
+			{{#link-to 'apps.branding'}}Branding{{/link-to}}
+		{{/list-link}}
+		{{#list-link}}
+			{{#link-to 'apps.analytics'}}Analytics{{/link-to}}
+		{{/list-link}}
+		{{#list-link}}
+			{{#link-to 'apps.console'}}API Console{{/link-to}}
+		{{/list-link}}
+		{{#list-link}}
+			{{#link-to 'apps.settings'}}Settings{{/link-to}}
+		{{/list-link}}
+	</ul>
+
+</section>

@@ -1,0 +1,8 @@
+    <h2>Your Apps</h2>
+	<ul class="apps">
+	{{#each model}}
+		{{#list-link}}
+		  {{name}} - {{#link-to 'apps.dashboard' this}}Edit{{/link-to}}
+		{{/list-link}}
+	{{/each}}
+	</ul>

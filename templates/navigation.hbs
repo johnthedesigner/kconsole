@@ -1,0 +1,14 @@
+	<ul class="title-area">
+	  <li class="name">
+	    <h1>{{link-to title 'application'}}</h1>
+	  </li>
+	</ul>
+	<section class="top-bar-section">
+	  <ul class="left">
+	    {{#each}}
+	    {{#list-link}}
+	      {{link-to title location}}
+	    {{/list-link}}
+	    {{/each}}
+	  </ul>
+	</section>
