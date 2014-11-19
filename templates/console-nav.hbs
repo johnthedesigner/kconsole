@@ -1,47 +1,71 @@
 <section class="top-bar-section">
 	
-	<ul class="apps-nav">
+	<div id="selected-app">
+		
 		<!-- List Apps -->
-		{{#each app in controller}}
-			{{#list-link}}
-			  {{#link-to 'apps.dashboard' app}}{{app.name}}{{/link-to}}
-			{{/list-link}}
-		{{/each}}
-		<li>{{#link-to 'index'}}My Apps{{/link-to}}</li>
-	</ul>
+		<div class="select-menu apps-nav">
+			<span></span>
+			<ul>
+				{{#each app in controller}}
+					{{#list-link}}
+						{{#link-to 'apps.dashboard' app}}{{app.name}}{{/link-to}}
+					{{/list-link}}
+				{{/each}}
+				<li>{{#link-to 'index'}}My Apps{{/link-to}}</li>
+			</ul>
+		</div>
+		
+		<!-- List Environments -->
+		<div class="select-menu env-nav">
+			<span></span>
+			<ul>
+				<li class="active"><a href="#">Development</a></li>
+				<li><a href="#">Staging</a></li>
+				<li><a href="#">Production</a></li>
+			</ul>
+		</div>
+		
+	</div>
 	
 	<!-- List App Config Modules -->
 	<ul class="app-config-nav">
+		{{#with this}}
 		{{#list-link}}
-			{{#link-to 'apps.dashboard'}}Dashboard{{/link-to}}
+			{{#link-to 'apps.dashboard' 1 classNames="dashboard"}}Dashboard{{/link-to}}
 		{{/list-link}}
 		{{#list-link}}
-			{{#link-to 'apps.users'}}Users{{/link-to}}
+			{{#link-to 'apps.users' 1 classNames="users"}}Users{{/link-to}}
 		{{/list-link}}
 		{{#list-link}}
-			{{#link-to 'apps.data'}}Data{{/link-to}}
+			{{#link-to 'apps.data' 1 classNames="data"}}Data{{/link-to}}
+			<ul>
+				<li>Data Type 1</li>
+				<li>Data Type 2</li>
+				<li>Data Type 3</li>
+			</ul>
 		{{/list-link}}
 		{{#list-link}}
-			{{#link-to 'apps.logic'}}Business Logic{{/link-to}}
+			{{#link-to 'apps.logic' 1 classNames="logic"}}Business Logic{{/link-to}}
 		{{/list-link}}
 		{{#list-link}}
-			{{#link-to 'apps.files'}}Files{{/link-to}}
+			{{#link-to 'apps.files' 1 classNames="files"}}Files{{/link-to}}
 		{{/list-link}}
 		{{#list-link}}
-			{{#link-to 'apps.push'}}Push{{/link-to}}
+			{{#link-to 'apps.push' 1 classNames="push"}}Push{{/link-to}}
 		{{/list-link}}
 		{{#list-link}}
-			{{#link-to 'apps.branding'}}Branding{{/link-to}}
+			{{#link-to 'apps.branding' 1 classNames="branding"}}Branding{{/link-to}}
 		{{/list-link}}
 		{{#list-link}}
-			{{#link-to 'apps.analytics'}}Analytics{{/link-to}}
+			{{#link-to 'apps.analytics' 1 classNames="analytics"}}Analytics{{/link-to}}
 		{{/list-link}}
 		{{#list-link}}
-			{{#link-to 'apps.console'}}API Console{{/link-to}}
+			{{#link-to 'apps.console' 1 classNames="console"}}API Console{{/link-to}}
 		{{/list-link}}
 		{{#list-link}}
-			{{#link-to 'apps.settings'}}Settings{{/link-to}}
+			{{#link-to 'apps.settings' 1 classNames="settings"}}Settings{{/link-to}}
 		{{/list-link}}
+		{{/with}}
 	</ul>
 
 </section>

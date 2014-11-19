@@ -83,6 +83,13 @@ KNav.IndexRoute = Ember.Route.extend({
 KNav.AppsRoute = Ember.Route.extend({
 	model: function(){
 	    return this.store.find('app');
+	},
+	afterModel: function(app, transition) {
+	    transition.then(function() {
+			console.log('insert');
+			//this.$('.select-menu span').html();
+			//$('this').find('li.active a').html();
+		});
 	}
 });
 
@@ -99,16 +106,36 @@ KNav.App.FIXTURES = [
     {
         id: 1,
         name: 'App 1',
-        color: 'red'
+        color: 'red',
+        environments: 'Development'
     },
-    {
+/*    {
         id: 2,
         name: 'App 2',
-        color: 'blue'
+        color: 'blue',
+        environments: 'Development'
     },
     {
         id: 3,
         name: 'App 3',
-        color: 'green'
-    }
+        color: 'green',
+        environments: 'Development'
+    }*/
 ];
+
+KNav.ApplicationView = Ember.View.extend({
+  currentPathDidChange: function() {
+    Ember.run.next( this, function() {
+      this.$("#sidebar li:has(>a.active)").addClass('active');
+      this.$("#sidebar  li:not(:has(>a.active))").removeClass('active');
+    });
+  			setTimeout(function(){
+				$.each($('.select-menu'),function(){
+					var active = $(this).find('.active a').html();
+					console.log(active);
+					$(this).find('span').html(active);
+				});
+			},50);
+  }.observes('controller.currentPath')
+
+});
