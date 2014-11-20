@@ -4,14 +4,36 @@
 @import "../less/grid.less";
 @import "../less/typography.less";
 
+/* COLORS */
+@startColorRed: #9E1F63;
+@endColorRed: #DA1C5C;
+@startColorBlue: #00A651;
+@endColorBlue: #00A79D;
+.red-gradient() {
+	background-color: @startColorRed;
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColorRed), to(@endColorRed));
+	background: -webkit-linear-gradient(top, @startColorRed, @endColorRed);
+	background: -moz-linear-gradient(top, @startColorRed, @endColorRed);
+	background: -ms-linear-gradient(top, @startColorRed, @endColorRed);
+	background: -o-linear-gradient(top, @startColorRed, @endColorRed);
+}
+.blue-gradient() {
+	background-color: @startColorBlue;
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColorBlue), to(@endColorBlue));
+	background: -webkit-linear-gradient(top, @startColorBlue, @endColorBlue);
+	background: -moz-linear-gradient(top, @startColorBlue, @endColorBlue);
+	background: -ms-linear-gradient(top, @startColorBlue, @endColorBlue);
+	background: -o-linear-gradient(top, @startColorBlue, @endColorBlue);
+}
+
 /* FONTS */
 @font-face {
   font-family: 'entypo';
-  src: url('fonts/entypo.eot'); /* IE9 Compat Modes */
-  src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('fonts/entypo.woff') format('woff'), /* Modern Browsers */
-       url('fonts/entypo.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/entypo.svg#svgFontName') format('svg'); /* Legacy iOS */
+  src: url('fonts/entypo.eot');
+  src: url('webfont.eot?#iefix') format('embedded-opentype'),
+       url('fonts/entypo.woff') format('woff'),
+       url('fonts/entypo.ttf')  format('truetype'),
+       url('fonts/entypo.svg#svgFontName') format('svg');
 }
 
 /* SIDEBAR */
@@ -28,8 +50,62 @@
 	color:#FFF;
 	overflow:scroll;
 }
+#sidebar.red{
+	.red-gradient;
+}
+#sidebar.blue{
+	.blue-gradient;
+}
 #sidebar #selected-app{
 	background:rgba(255,255,255,.2);
+	height:80px;
+}
+#sidebar #selected-app .select-menu{
+	font-size:.75em;
+	margin-left:70px;
+	position:relative;
+}
+#sidebar #selected-app .select-menu:after{
+	font-family:FontAwesome;
+	content:"\f0dd";
+	margin-left:10px;
+}
+#sidebar #selected-app .select-menu ul{
+	position:absolute;
+	top:24px;
+	left:-20px;
+	background:rgba(255,255,255,.9);
+	color:@startColorRed;
+	padding:20px;
+	z-index:10;
+}
+#sidebar.red #selected-app .select-menu ul li a{
+	color:@startColorRed;
+}
+#sidebar.blue #selected-app .select-menu ul li a{
+	color:@startColorBlue;
+}
+#sidebar #selected-app .apps-nav{
+	padding-top:16px;
+}
+#sidebar #selected-app .apps-nav ul{
+	top:40px;
+}
+.app-icon{
+	position:absolute;
+	top:16px;
+	left:-60px;
+	display:block;
+	width:12px;
+	height:12px;
+	padding:17px;
+	background:rgba(255,255,255,.4);
+	font-size:1.5em;
+	line-height:12px;
+	text-align:center;
+}
+.app-icon-circle{
+	border-radius:50%;
 }
 #sidebar ul{
 	list-style:none;
@@ -43,13 +119,17 @@
 #sidebar .select-menu ul{
 	display:none;
 }
+#sidebar .select-menu.open ul{
+	display:block;
+}
 #sidebar .app-config-nav li a{
 	display:block;
 	background:transparent;
 	transition:background linear .2s;
 	padding:10px 20px;
+	position:relative;
 }
-#sidebar .app-config-nav li a.active{
+#sidebar .app-config-nav li a.active,#sidebar .app-config-nav li a:hover{
 	background:rgba(255,255,255,.1);
 }
 #sidebar .app-config-nav li ul{
@@ -63,6 +143,44 @@
 #sidebar .app-config-nav li ul li{
 	font-size:.75em;
 	padding:10px 30px 10px 80px;
+}
+
+/* HEADER */
+#header{
+	position:relative;
+	height:60px;
+}
+#user-nav{
+	position:absolute;
+	display:block;
+	top:0;
+	right:0;
+	height:60px;
+	padding-left:60px;
+	background-color:#DDD;
+	background-image:url(../img/avatar.png);
+	background-size:30px 30px;
+	background-position:15px 15px;
+	background-repeat:no-repeat;
+}
+#user-nav span{
+	display:block;
+	padding:20px 30px 0 0;
+	color:#999;
+}
+#user-nav span:after{
+	font-family:FontAwesome;
+	content:"\f0dd";
+	margin-left:10px;
+}
+#branding{
+	background-image:url(../img/logo.png);
+	background-position:center center;
+	background-size:170px 60px;
+	background-repeat:no-repeat;
+	height:60px;
+	width:170px;
+	display:block;
 }
 
 /* ICONS */
@@ -84,6 +202,13 @@
 .data:before{
 	.console-icons;
 	content:"\f1c0";
+}
+.data:after{
+	.console-icons;
+	content:"\f067";
+	position:absolute;
+	top:16px;
+	right:0;
 }
 .logic:before{
 	.console-icons;
@@ -127,6 +252,48 @@
 header#header{
 	background:#EEE;
 }
+#primary #content{
+    -webkit-animation: fadein .2s; /* Safari, Chrome and Opera > 12.1 */
+	-moz-animation: fadein .2s; /* Firefox < 16 */
+	-ms-animation: fadein .2s; /* Internet Explorer */
+	-o-animation: fadein .2s; /* Opera < 12.1 */
+	animation: fadein .2s;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* MY APPS */
+#my-apps h2{
+	font-family:"proxima-nova-alt",sans-serif;
+	font-weight:200;
+	color:#999;
+}
+#my-apps ul.apps{
+	list-style:none;
+	background:#EEE;
+}
+#my-apps ul.apps li{
+	padding:30px;
+}
+
 
 /* DEMO CONTENT */
 .demo-columns div[class^="kit-column"]{

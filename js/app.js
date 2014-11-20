@@ -19,31 +19,125 @@ KNav.ApplicationController = Ember.Controller.extend({
   }.observes('currentPath')
 });
 
+// ROUTES
 KNav.Router.map(function() {
-	this.route('one');
-	this.route('two');
-	this.route('three');
 	
 	// APP ROUTING
-	this.resource('apps', { path: '/app' }, function() {
-		// Index
-	    this.route('index', { path: '/' });
-	    // Edit
-	    this.route('dashboard', { path: '/:app_id/dashboard' });
-	    this.route('dashboard', { path: '/:app_id' });
-	    // Create
-	    this.route('create');
-	    // App Modules
-	    this.route('users', { path: '/:app_id/users' });
-	    this.route('data', { path: '/:app_id/data' });
-	    this.route('logic', { path: '/:app_id/logic' });
-	    this.route('files', { path: '/:app_id/files' });
-	    this.route('push', { path: '/:app_id/push' });
-	    this.route('branding', { path: '/:app_id/branding' });
-	    this.route('analytics', { path: '/:app_id/analyics' });
-	    this.route('console', { path: '/:app_id/console' });
-	    this.route('settings', { path: '/:app_id/settings' });
+	this.resource('app', function() {
+	    // Edit App One
+	    this.route('one', function(){
+		    
+		    this.route('index',{path:'/'});
+		    // App Modules
+		    this.route('dashboard');
+		    this.route('users');
+		    this.route('data');
+		    this.route('logic');
+		    this.route('files');
+		    this.route('push');
+		    this.route('branding');
+		    this.route('analytics');
+		    this.route('console');
+		    this.route('settings');
+
+	    });
+	    // Edit App Two
+	    this.route('two', function(){
+		    
+		    this.route('index',{path:'/'});
+		    // App Modules
+		    this.route('dashboard');
+		    this.route('users');
+		    this.route('data');
+		    this.route('logic');
+		    this.route('files');
+		    this.route('push');
+		    this.route('branding');
+		    this.route('analytics');
+		    this.route('console');
+		    this.route('settings');
+
+	    });
 	});
+});
+
+// Apps
+KNav.AppRoute = Ember.Route.extend ({
+    model: function(params) {
+        return this.store.find('app',1);
+    }
+});
+KNav.AppOneRoute = Ember.Route.extend ({
+    model: function(params) {
+        return this.store.find('app',1);
+    },
+    renderTemplate: function(){
+	    this.render('sidebar-one', { outlet: 'sidebar'});
+	}
+});
+KNav.AppTwoRoute = Ember.Route.extend ({
+    model: function(params) {
+        return this.store.find('app',2);
+    },
+    renderTemplate: function(){
+	    this.render('sidebar-two', { outlet: 'sidebar'});
+	}
+});
+KNav.SidebarAppIndexRoute = Ember.Route.extend ({
+    model: function(params) {
+        return this.store.find('app',params.app_id);
+    }
+});
+
+// Index
+//KNav.IndexRoute = Ember.Route.extend({
+//	model: function(){
+//	    return this.store.find('app');
+//	}
+//});
+
+// MODELS
+// App Models
+KNav.App = DS.Model.extend({
+    name   : DS.attr('string'),
+    color  : DS.attr('string'),
+    creationDate : DS.attr('date')
+});
+// Add Test Apps
+KNav.App.FIXTURES = [
+    {
+        id: 1,
+        name: 'App 1',
+        color: 'red',
+        environments: 'Development'
+    },
+    {
+        id: 2,
+        name: 'App 2',
+        color: 'blue',
+        environments: 'Development'
+    }
+];
+
+// CONTROLLERS
+// App Controller
+KNav.AppOneIndexController = Ember.ObjectController.extend({
+	needs: 'app',
+	color: 'red',
+	setupController: function(controller,model){
+		controller.set('app', this.store.find('app'));
+	}
+});
+
+KNav.SidebarController = Ember.ObjectController.extend({
+	needs: ['app'],
+	color: function() {
+		//console.log(KNav);
+		//console.log(this.store.find('app',1));
+		var color = this.get('app');
+		console.log(color);
+		return 'red';
+    }.property('app')
 });
 
 // NAVIGATION
@@ -71,71 +165,4 @@ KNav.ListLinkComponent = Ember.Component.extend({
 	    return this.get('childViews').anyBy('active');
 	}.property('childViews.@each.active')
 });
-//export default NavigationController;
-//console.log(Ember.ArrayController('navigation'));
 
-// Index Apps Route
-KNav.IndexRoute = Ember.Route.extend({
-	model: function(){
-	    return this.store.find('app');
-	}
-});
-KNav.AppsRoute = Ember.Route.extend({
-	model: function(){
-	    return this.store.find('app');
-	},
-	afterModel: function(app, transition) {
-	    transition.then(function() {
-			console.log('insert');
-			//this.$('.select-menu span').html();
-			//$('this').find('li.active a').html();
-		});
-	}
-});
-
-// the model for an App
-KNav.App = DS.Model.extend({
-    name   : DS.attr('string'),
-    color  : DS.attr('string'),
-    creationDate : DS.attr('date')
-});
-
-// These are fakes datas for the FixtureAdapter.
-// The FixtureAdapter lets you work with fake datas while in development stage.
-KNav.App.FIXTURES = [
-    {
-        id: 1,
-        name: 'App 1',
-        color: 'red',
-        environments: 'Development'
-    },
-/*    {
-        id: 2,
-        name: 'App 2',
-        color: 'blue',
-        environments: 'Development'
-    },
-    {
-        id: 3,
-        name: 'App 3',
-        color: 'green',
-        environments: 'Development'
-    }*/
-];
-
-KNav.ApplicationView = Ember.View.extend({
-  currentPathDidChange: function() {
-    Ember.run.next( this, function() {
-      this.$("#sidebar li:has(>a.active)").addClass('active');
-      this.$("#sidebar  li:not(:has(>a.active))").removeClass('active');
-    });
-  			setTimeout(function(){
-				$.each($('.select-menu'),function(){
-					var active = $(this).find('.active a').html();
-					console.log(active);
-					$(this).find('span').html(active);
-				});
-			},50);
-  }.observes('controller.currentPath')
-
-});

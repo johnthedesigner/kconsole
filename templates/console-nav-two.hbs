@@ -1,0 +1,71 @@
+<section {{bind-attr class="app.color"}}>
+	
+	<div id="selected-app">
+		
+		<!-- List Apps -->
+		<div class="select-menu apps-nav">
+			<span class="app-icon app-icon-diamond">2</span>
+			<span>App Two</span>
+			<ul>
+				{{#list-link}}
+					{{#link-to 'app.one.index'}}App One{{/link-to}}
+				{{/list-link}}
+				{{#list-link}}
+					{{#link-to 'app.two.index'}}App Two{{/link-to}}
+				{{/list-link}}
+				<li>{{#link-to 'index'}}My Apps{{/link-to}}</li>
+			</ul>
+		</div>
+		
+		<!-- List Environments -->
+		<div class="select-menu env-nav">
+			<span>Development</span>
+			<ul>
+				<li class="active"><a href="#">Development</a></li>
+				<li><a href="#">Staging</a></li>
+				<li><a href="#">Production</a></li>
+			</ul>
+		</div>
+		
+	</div>
+	
+	<!-- List App Config Modules -->
+	<ul class="app-config-nav">
+			{{#list-link}}
+				{{#link-to 'app.two.index' classNames="dashboard"}}Dashboard{{/link-to}}
+			{{/list-link}}
+			{{#list-link}}
+				{{#link-to 'app.two.users' classNames="users"}}Users{{/link-to}}
+			{{/list-link}}
+			{{#list-link}}
+				{{#link-to 'app.two.data' classNames="data"}}Data<span class="add-data"></span>{{/link-to}}
+				<ul>
+					<li>Data Type 1</li>
+					<li>Data Type 2</li>
+					<li>Data Type 3</li>
+				</ul>
+			{{/list-link}}
+			{{#list-link}}
+				{{#link-to 'app.two.logic' classNames="logic"}}Business Logic{{/link-to}}
+			{{/list-link}}
+			{{#list-link}}
+				{{#link-to 'app.two.files' classNames="files"}}Files{{/link-to}}
+			{{/list-link}}
+			{{#list-link}}
+				{{#link-to 'app.two.push' classNames="push"}}Push{{/link-to}}
+			{{/list-link}}
+			{{#list-link}}
+				{{#link-to 'app.two.branding' classNames="branding"}}Branding{{/link-to}}
+			{{/list-link}}
+			{{#list-link}}
+				{{#link-to 'app.two.analytics' classNames="analytics"}}Analytics{{/link-to}}
+			{{/list-link}}
+			{{#list-link}}
+				{{#link-to 'app.two.console' classNames="console"}}API Console{{/link-to}}
+			{{/list-link}}
+			{{#list-link}}
+				{{#link-to 'app.two.settings' classNames="settings"}}Settings{{/link-to}}
+			{{/list-link}}
+	</ul>
+
+</section>

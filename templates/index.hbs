@@ -1,8 +1,31 @@
-    <h2>Your Apps</h2>
-	<ul class="apps">
-	{{#each model}}
-		{{#list-link}}
-		  {{name}} - {{#link-to 'apps.dashboard' this}}Edit{{/link-to}}
-		{{/list-link}}
-	{{/each}}
-	</ul>
+		<section id="index">
+			
+			<header id="header">
+				<a href="#" id="branding"></a>
+				<nav id="user-nav">
+					<span>johnthedesigner</span>
+				</nav>
+			</header>
+			
+			<section class="kit-wrapper-flex" id="content">
+				
+				<hr class="kit-spacer-10">
+		        
+		        <!-- Column – Default full-width at top desktop size -->
+		        <div class="kit-column-large kit-push-small" id="my-apps">
+				    <h2 class="center">Your Apps</h2>
+				    
+					<ul class="apps">
+						{{#list-link}}
+						  App One - {{#link-to 'app.one.index'}}Edit{{/link-to}}
+						{{/list-link}}
+						{{#list-link}}
+						  App Two - {{#link-to 'app.two.index'}}Edit{{/link-to}}
+						{{/list-link}}
+					</ul>
+		        </div>
+		        
+			</section>
+			
+		</section>
+
